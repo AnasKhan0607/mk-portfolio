@@ -15,12 +15,19 @@ interface Candle {
 
 export default function FloatingCandles() {
   const [candles, setCandles] = useState<Candle[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Create atmospheric candles - fewer, more realistic
-    const generatedCandles: Candle[] = Array.from({ length: 8 }, (_, i) => ({
+    // Check if mobile
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // Create atmospheric candles - fewer on mobile
+    const candleCount = window.innerWidth < 768 ? 4 : 8;
+    const generatedCandles: Candle[] = Array.from({ length: candleCount }, (_, i) => ({
       id: i,
-      x: 10 + (i * 12) + (Math.random() * 6 - 3), // Spread across top
+      x: 10 + (i * (90 / candleCount)) + (Math.random() * 6 - 3),
       y: 5 + Math.random() * 15,
       height: 40 + Math.random() * 30,
       delay: Math.random() * 2,
@@ -28,13 +35,15 @@ export default function FloatingCandles() {
       brightness: 0.6 + Math.random() * 0.4,
     }));
     setCandles(generatedCandles);
+
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       {/* Ambient candlelight glow on ceiling */}
       <div 
-        className="absolute top-0 left-0 right-0 h-64 opacity-30"
+        className="absolute top-0 left-0 right-0 h-48 md:h-64 opacity-20 md:opacity-30"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 0%, rgba(255, 180, 80, 0.3) 0%, transparent 70%)'
         }}
@@ -43,7 +52,7 @@ export default function FloatingCandles() {
       {candles.map((candle) => (
         <motion.div
           key={candle.id}
-          className="absolute"
+          className="absolute hidden sm:block"
           style={{
             left: `${candle.x}%`,
             top: `${candle.y}%`,
@@ -121,11 +130,11 @@ export default function FloatingCandles() {
         </motion.div>
       ))}
       
-      {/* Dust particles in candlelight */}
-      {Array.from({ length: 15 }).map((_, i) => (
+      {/* Dust particles in candlelight - fewer on mobile */}
+      {!isMobile && Array.from({ length: 10 }).map((_, i) => (
         <motion.div
           key={`dust-${i}`}
-          className="absolute w-1 h-1 rounded-full bg-amber-200/30"
+          className="absolute w-1 h-1 rounded-full bg-amber-200/30 hidden md:block"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 40}%`,
