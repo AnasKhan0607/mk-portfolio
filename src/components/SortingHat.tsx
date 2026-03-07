@@ -71,10 +71,13 @@ export default function SortingHat() {
             <div className="relative w-64 h-64 mx-auto mb-8">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-scarlet to-gold animate-pulse" />
               <div className="absolute inset-2 rounded-full bg-background flex items-center justify-center overflow-hidden">
-                {/* Placeholder - replace with actual image */}
-                <div className="w-full h-full bg-gradient-to-br from-scarlet/20 to-gold/20 flex items-center justify-center">
-                  <span className="text-6xl">🧙‍♂️</span>
-                </div>
+                <Image
+                  src="/profile.jpg"
+                  alt="Muhammad Khan"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
               {/* Gryffindor badge */}
               <motion.div
