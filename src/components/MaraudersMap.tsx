@@ -17,7 +17,7 @@ const experiences: Experience[] = [
     id: 'tmu',
     role: 'Software Engineer',
     organization: 'Toronto Metropolitan University',
-    period: 'September 2025 — May 2026',
+    period: 'Sep 2025 — May 2026',
     description: 'AI-Powered Mobile Wellness Companion',
     achievements: [
       'Built secure AI microservice (.NET 9) with REST APIs, rate limiting, and API key authentication',
@@ -31,7 +31,7 @@ const experiences: Experience[] = [
     id: 'learningmode',
     role: 'Software Engineer',
     organization: 'LearningModeAI',
-    period: 'December 2024 — June 2025',
+    period: 'Dec 2024 — Jun 2025',
     description: 'Chrome Extension & Scalable Microservices',
     achievements: [
       'Developed Chrome extension leveraging GPT-4o for real-time contextual Q&A',
@@ -45,7 +45,7 @@ const experiences: Experience[] = [
 
 export default function MaraudersMap() {
   return (
-    <section id="marauders-map" className="relative min-h-screen py-24 px-6 overflow-hidden">
+    <section id="marauders-map" className="relative min-h-screen py-16 md:py-24 px-4 md:px-6 overflow-hidden">
       {/* Map-like background texture */}
       <div 
         className="absolute inset-0 opacity-5"
@@ -61,26 +61,26 @@ export default function MaraudersMap() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <div className="divider mb-8">
+          <div className="divider mb-6 md:mb-8">
             <span className="text-gold-muted">✦</span>
           </div>
-          <h2 className="chapter-heading text-3xl md:text-4xl text-gold mb-4">
+          <h2 className="chapter-heading text-2xl md:text-3xl lg:text-4xl text-gold mb-3 md:mb-4">
             Chapter III
           </h2>
-          <p className="text-2xl md:text-3xl text-foreground font-serif">
+          <p className="text-xl md:text-2xl lg:text-3xl text-foreground font-serif">
             The Journey Thus Far
           </p>
-          <p className="text-foreground/50 font-mono text-sm mt-6 incantation">
+          <p className="text-foreground/50 font-mono text-xs md:text-sm mt-4 md:mt-6 incantation">
             &ldquo;I solemnly swear that I am up to no good.&rdquo;
           </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold-muted/50 to-transparent md:-translate-x-1/2" />
+          {/* Vertical line - hidden on mobile, shown on left for tablet+ */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold-muted/50 to-transparent md:-translate-x-1/2 hidden sm:block" />
 
           {experiences.map((exp, index) => (
             <motion.div
@@ -89,16 +89,16 @@ export default function MaraudersMap() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ delay: index * 0.2 }}
-              className={`relative mb-16 last:mb-0 ${
+              className={`relative mb-8 md:mb-16 last:mb-0 ${
                 index % 2 === 0 ? 'md:pr-[52%]' : 'md:pl-[52%]'
               }`}
             >
-              {/* Timeline dot */}
-              <div className="absolute left-0 md:left-1/2 w-3 h-3 bg-gold-muted rounded-full md:-translate-x-1/2 -translate-x-1/2 top-8 shadow-lg shadow-gold/20" />
+              {/* Timeline dot - hidden on mobile */}
+              <div className="absolute left-4 md:left-1/2 w-2 md:w-3 h-2 md:h-3 bg-gold-muted rounded-full md:-translate-x-1/2 -translate-x-1/2 top-6 md:top-8 shadow-lg shadow-gold/20 hidden sm:block" />
               
               {/* Footsteps decoration */}
               <motion.div
-                className="absolute left-0 md:left-1/2 md:-translate-x-1/2 -translate-x-1/2 top-2 text-gold-muted/40 text-xs"
+                className="absolute left-4 md:left-1/2 md:-translate-x-1/2 -translate-x-1/2 top-1 md:top-2 text-gold-muted/40 text-[10px] md:text-xs hidden sm:block"
                 animate={{ opacity: [0.2, 0.6, 0.2] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
@@ -106,39 +106,39 @@ export default function MaraudersMap() {
               </motion.div>
 
               {/* Content card */}
-              <div className="ml-6 md:ml-0 parchment aged-paper p-6">
+              <div className="sm:ml-10 md:ml-0 parchment aged-paper p-4 md:p-6">
                 {/* Header */}
-                <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap items-start justify-between gap-1 sm:gap-2 mb-3 md:mb-4">
                   <div>
-                    <h3 className="text-lg text-ink font-serif">{exp.role}</h3>
-                    <p className="text-sepia">{exp.organization}</p>
+                    <h3 className="text-base md:text-lg text-ink font-serif">{exp.role}</h3>
+                    <p className="text-sepia text-sm md:text-base">{exp.organization}</p>
                   </div>
-                  <span className="text-xs text-sepia/70 font-mono whitespace-nowrap">
+                  <span className="text-[10px] md:text-xs text-sepia/70 font-mono whitespace-nowrap mt-1 sm:mt-0">
                     {exp.period}
                   </span>
                 </div>
 
                 {/* Project description */}
-                <p className="text-ink/70 text-sm incantation mb-4 pb-4 border-b border-sepia/20">
+                <p className="text-ink/70 text-xs md:text-sm incantation mb-3 md:mb-4 pb-3 md:pb-4 border-b border-sepia/20">
                   {exp.description}
                 </p>
 
                 {/* Achievements */}
-                <ul className="space-y-2 mb-4">
+                <ul className="space-y-1.5 md:space-y-2 mb-3 md:mb-4">
                   {exp.achievements.map((achievement, i) => (
-                    <li key={i} className="flex items-start gap-2 text-ink/80 text-sm">
-                      <span className="text-gold-muted mt-0.5">›</span>
-                      {achievement}
+                    <li key={i} className="flex items-start gap-2 text-ink/80 text-xs md:text-sm">
+                      <span className="text-gold-muted mt-0.5 flex-shrink-0">›</span>
+                      <span>{achievement}</span>
                     </li>
                   ))}
                 </ul>
 
                 {/* Tools */}
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-sepia/20">
+                <div className="flex flex-wrap gap-1.5 md:gap-2 pt-3 md:pt-4 border-t border-sepia/20">
                   {exp.tools.map((tool) => (
                     <span
                       key={tool}
-                      className="px-2 py-0.5 bg-ink/5 text-sepia text-xs rounded-sm"
+                      className="px-1.5 md:px-2 py-0.5 bg-ink/5 text-sepia text-[10px] md:text-xs rounded-sm"
                     >
                       {tool}
                     </span>
@@ -154,9 +154,9 @@ export default function MaraudersMap() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-10 md:mt-16"
         >
-          <p className="text-foreground/40 font-mono text-sm incantation">
+          <p className="text-foreground/40 font-mono text-xs md:text-sm incantation">
             &ldquo;Mischief Managed.&rdquo;
           </p>
         </motion.div>
