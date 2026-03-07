@@ -14,9 +14,9 @@ interface TypewriterTextProps {
 export default function TypewriterText({
   texts,
   className = '',
-  typingSpeed = 100,
-  deletingSpeed = 50,
-  pauseDuration = 2000,
+  typingSpeed = 80,
+  deletingSpeed = 40,
+  pauseDuration = 3000,
 }: TypewriterTextProps) {
   const [displayText, setDisplayText] = useState('');
   const [textIndex, setTextIndex] = useState(0);
@@ -59,13 +59,12 @@ export default function TypewriterText({
   }, [displayText, textIndex, isDeleting, isPaused, texts, typingSpeed, deletingSpeed, pauseDuration]);
 
   return (
-    <span className={className}>
-      <span className="text-gold">&gt; </span>
+    <span className={`${className} incantation`}>
       {displayText}
       <motion.span
-        className="inline-block w-3 h-6 ml-1 bg-gold align-middle"
+        className="inline-block w-0.5 h-5 ml-0.5 bg-ink align-middle"
         animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.8, repeat: Infinity }}
+        transition={{ duration: 0.6, repeat: Infinity }}
       />
     </span>
   );

@@ -4,240 +4,220 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
-const sortingTraits = [
-  { trait: 'Courage', description: 'Ships to production on Fridays', house: 'GRYFFINDOR' },
-  { trait: 'Ambition', description: 'Always chasing that next big project', house: 'GRYFFINDOR' },
-  { trait: 'Intelligence', description: 'Debugs at 3 AM and finds the issue', house: 'GRYFFINDOR' },
-  { trait: 'Determination', description: 'Never gives up on a failing build', house: 'GRYFFINDOR' },
-];
-
-const skills = [
-  'LLM Engineering',
-  'Distributed Systems',
-  'Cloud Infrastructure',
-  'Backend Development',
-  'AI/ML Integration',
-  'DevOps & CI/CD',
+const traits = [
+  'Courage in the face of production deployments...',
+  'A mind sharp enough to debug the darkest code...',
+  'Ambition to build systems that scale...',
+  'Loyalty to clean architecture and best practices...',
 ];
 
 export default function SortingHat() {
   const [isSorted, setIsSorted] = useState(false);
-  const [currentTraitIndex, setCurrentTraitIndex] = useState(0);
+  const [currentTrait, setCurrentTrait] = useState(0);
   const [showResult, setShowResult] = useState(false);
 
   const handleSort = () => {
     if (isSorted) return;
     setIsSorted(true);
     
-    // Cycle through traits before revealing
     let index = 0;
     const interval = setInterval(() => {
-      setCurrentTraitIndex(index);
+      setCurrentTrait(index);
       index++;
-      if (index >= sortingTraits.length) {
+      if (index >= traits.length) {
         clearInterval(interval);
-        setTimeout(() => setShowResult(true), 500);
+        setTimeout(() => setShowResult(true), 800);
       }
-    }, 800);
+    }, 1200);
   };
 
   return (
-    <section id="sorting-hat" className="min-h-screen bg-gradient-to-b from-background via-background/95 to-background relative z-20 py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
+    <section id="sorting-hat" className="relative min-h-screen py-24 px-6">
+      {/* Parchment background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-ink-light/50 to-background" />
+      
+      <div className="relative z-10 max-w-5xl mx-auto">
+        {/* Section heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">🎩 The Sorting Hat</span>
+          <div className="divider mb-8">
+            <span className="text-gold-muted">✦</span>
+          </div>
+          <h2 className="chapter-heading text-3xl md:text-4xl text-gold mb-4">
+            Chapter I
           </h2>
-          <p className="text-foreground/60 text-lg max-w-2xl mx-auto">
-            &quot;Hmm, difficult. Very difficult. Plenty of courage, I see. Not a bad mind either...&quot;
+          <p className="text-2xl md:text-3xl text-foreground font-serif">
+            The Sorting Ceremony
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left side - Profile */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left - Portrait */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="relative"
           >
-            {/* Profile Image Placeholder */}
-            <div className="relative w-64 h-64 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-scarlet to-gold animate-pulse" />
-              <div className="absolute inset-2 rounded-full bg-background flex items-center justify-center overflow-hidden">
+            {/* Ornate frame */}
+            <div className="relative max-w-sm mx-auto">
+              {/* Frame border */}
+              <div className="absolute -inset-4 border-4 border-gold-muted/60 rounded-sm" />
+              <div className="absolute -inset-6 border border-gold-muted/30 rounded-sm" />
+              
+              {/* Corner decorations */}
+              {['top-left', 'top-right', 'bottom-left', 'bottom-right'].map((corner) => (
+                <div
+                  key={corner}
+                  className={`absolute w-8 h-8 border-gold-muted
+                    ${corner.includes('top') ? '-top-8' : '-bottom-8'}
+                    ${corner.includes('left') ? '-left-8 border-l-2 border-t-2' : '-right-8 border-r-2 border-t-2'}
+                    ${corner.includes('bottom') ? 'border-b-2 border-t-0' : ''}
+                  `}
+                />
+              ))}
+              
+              {/* Portrait */}
+              <div className="relative aspect-[3/4] overflow-hidden bg-ink">
                 <Image
                   src="/profile.jpg"
                   alt="Muhammad Khan"
                   fill
-                  className="object-cover"
+                  className="object-cover sepia-[0.2] contrast-[1.1]"
                   priority
                 />
+                {/* Aged overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/40" />
               </div>
-              {/* Gryffindor badge */}
-              <motion.div
-                className="absolute -bottom-2 -right-2 w-16 h-16 rounded-full bg-scarlet border-4 border-gold flex items-center justify-center shadow-lg"
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <span className="text-2xl">🦁</span>
-              </motion.div>
+              
+              {/* Nameplate */}
+              <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-full">
+                <div className="parchment aged-paper py-3 px-6 text-center mx-8">
+                  <h3 className="chapter-heading text-lg text-ink tracking-widest">
+                    Muhammad Khan
+                  </h3>
+                  <p className="text-sepia text-sm mt-1">Software Engineer</p>
+                </div>
+              </div>
             </div>
 
-            {/* Name and Title */}
-            <div className="text-center">
-              <h3 className="text-3xl font-bold text-foreground mb-2">Muhammad Khan</h3>
-              <p className="text-gold text-lg font-mono">Software Engineer</p>
-              <p className="text-foreground/60 mt-2">Toronto, ON 🇨🇦</p>
-            </div>
-
-            {/* Quick Links */}
-            <div className="flex justify-center gap-4 mt-6">
-              <a
-                href="https://github.com/Muhmdk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-foreground/10 hover:bg-gold/20 rounded-full text-sm font-mono transition-colors border border-gold/30"
-              >
-                GitHub ↗
-              </a>
-              <a
-                href="https://linkedin.com/in/muhmdk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-foreground/10 hover:bg-gold/20 rounded-full text-sm font-mono transition-colors border border-gold/30"
-              >
-                LinkedIn ↗
-              </a>
+            {/* Info below portrait */}
+            <div className="mt-20 text-center">
+              <p className="text-foreground/60 text-sm">
+                Toronto Metropolitan University
+              </p>
+              <p className="text-gold-muted text-sm mt-1">
+                Bachelor of Engineering, Class of 2026
+              </p>
+              
+              {/* Links */}
+              <div className="flex justify-center gap-6 mt-6">
+                <a
+                  href="https://github.com/Muhmdk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground/60 hover:text-gold transition-colors text-sm underline underline-offset-4 decoration-gold-muted/50"
+                >
+                  GitHub Archives
+                </a>
+                <a
+                  href="https://linkedin.com/in/muhmdk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground/60 hover:text-gold transition-colors text-sm underline underline-offset-4 decoration-gold-muted/50"
+                >
+                  LinkedIn Registry
+                </a>
+              </div>
             </div>
           </motion.div>
 
-          {/* Right side - Sorting Ceremony */}
+          {/* Right - Sorting Ceremony */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative"
           >
-            {/* Sorting Hat Card */}
-            <div className="bg-background/50 backdrop-blur-md border border-gold/30 rounded-2xl p-8">
+            <div className="parchment aged-paper p-8 md:p-10">
               {!isSorted ? (
                 <div className="text-center">
-                  <motion.div
-                    className="text-8xl mb-6"
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    🎩
-                  </motion.div>
-                  <p className="text-foreground/80 mb-6 font-serif italic">
-                    &quot;Let me look into your mind... Click to begin the sorting ceremony.&quot;
+                  <p className="text-ink text-lg leading-relaxed mb-8 incantation">
+                    &ldquo;Ah, another soul seeking their place in the grand tapestry of code. 
+                    Come, let me peer into the depths of your technical prowess...&rdquo;
                   </p>
+                  
                   <button
                     onClick={handleSort}
-                    className="px-8 py-3 bg-scarlet text-foreground font-semibold rounded-full border-2 border-gold hover:bg-scarlet/80 hover:scale-105 transition-all duration-300"
+                    className="px-8 py-3 bg-burgundy text-parchment font-serif rounded-sm border border-gold-muted/50 hover:bg-burgundy/90 transition-colors shadow-lg"
                   >
-                    ✨ Begin Sorting
+                    Begin the Ceremony
                   </button>
                 </div>
               ) : !showResult ? (
-                <div className="text-center">
-                  <motion.div
-                    className="text-8xl mb-6"
-                    animate={{ rotate: [-5, 5, -5] }}
-                    transition={{ duration: 0.3, repeat: Infinity }}
-                  >
-                    🎩
-                  </motion.div>
+                <div className="text-center min-h-[200px] flex flex-col justify-center">
                   <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentTraitIndex}
-                      initial={{ opacity: 0, y: 20 }}
+                    <motion.p
+                      key={currentTrait}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      className="text-foreground/80 font-serif italic"
+                      exit={{ opacity: 0, y: -10 }}
+                      className="text-ink text-lg incantation"
                     >
-                      <p className="text-xl mb-2">&quot;{sortingTraits[currentTraitIndex].trait}...&quot;</p>
-                      <p className="text-sm text-foreground/60">{sortingTraits[currentTraitIndex].description}</p>
-                    </motion.div>
+                      &ldquo;{traits[currentTrait]}&rdquo;
+                    </motion.p>
                   </AnimatePresence>
                 </div>
               ) : (
                 <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   className="text-center"
                 >
-                  <div className="text-6xl mb-4">🦁</div>
-                  <h4 className="text-3xl font-bold text-scarlet mb-2 text-glow-scarlet">GRYFFINDOR!</h4>
-                  <p className="text-foreground/80 mb-6">
-                    &quot;Where dwell the brave at heart, their daring, nerve, and chivalry set Gryffindors apart!&quot;
+                  <div className="mb-6">
+                    <p className="chapter-heading text-burgundy text-2xl tracking-widest">
+                      GRYFFINDOR
+                    </p>
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gold-muted to-transparent mx-auto mt-4" />
+                  </div>
+                  
+                  <p className="text-ink leading-relaxed mb-6 incantation">
+                    &ldquo;Where dwell the brave at heart, their daring, nerve, and chivalry 
+                    set Gryffindors apart! You shall build systems that others fear to deploy.&rdquo;
                   </p>
                   
-                  {/* Skills as magical abilities */}
-                  <div className="flex flex-wrap justify-center gap-2 mt-6">
-                    {skills.map((skill, index) => (
-                      <motion.span
-                        key={skill}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="px-3 py-1 bg-gold/20 text-gold text-sm rounded-full border border-gold/30"
-                      >
-                        {skill}
-                      </motion.span>
-                    ))}
+                  {/* Wax seal */}
+                  <div className="wax-seal mx-auto mt-8">
+                    <span className="text-parchment font-serif text-xl">G</span>
                   </div>
                 </motion.div>
               )}
             </div>
 
-            {/* Education */}
+            {/* About text */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="mt-8 bg-background/50 backdrop-blur-md border border-gold/30 rounded-xl p-6"
+              className="mt-8 text-foreground/80 leading-relaxed"
             >
-              <h4 className="text-gold font-semibold mb-3 flex items-center gap-2">
-                <span>🏫</span> Wizarding Education
-              </h4>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-scarlet/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl">🎓</span>
-                </div>
-                <div>
-                  <h5 className="font-semibold text-foreground">Toronto Metropolitan University</h5>
-                  <p className="text-foreground/60 text-sm">Bachelor of Engineering, Software Engineering</p>
-                  <p className="text-gold text-sm font-mono">Class of 2026</p>
-                </div>
-              </div>
+              <p>
+                A Software Engineering graduate with hands-on experience building{' '}
+                <span className="text-gold">LLM-powered applications</span>,{' '}
+                <span className="text-gold">distributed systems</span>, and{' '}
+                <span className="text-gold">scalable microservices</span>.
+              </p>
+              <p className="mt-4 text-foreground/60 text-sm">
+                Passionate about shipping production-ready AI products and crafting 
+                elegant solutions to complex problems.
+              </p>
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Bio Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 max-w-3xl mx-auto text-center"
-        >
-          <p className="text-lg text-foreground/80 leading-relaxed">
-            Software Engineering new grad with hands-on experience building{' '}
-            <span className="text-gold">LLM-powered applications</span>,{' '}
-            <span className="text-gold">distributed systems</span>, and{' '}
-            <span className="text-gold">scalable microservices</span>. 
-            Strong background in backend development, cloud infrastructure, and real-time systems, 
-            with a passion for shipping production-ready AI products.
-          </p>
-        </motion.div>
       </div>
     </section>
   );

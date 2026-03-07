@@ -1,15 +1,25 @@
 import type { Metadata } from "next";
-import { Cinzel, JetBrains_Mono } from "next/font/google";
+import { Cinzel, Crimson_Text, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-// Magical serif font for headings
+// Display font for headings - medieval/fantasy feel
 const cinzel = Cinzel({
   variable: "--font-cinzel",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
-// Monospace for terminal/code elements
+// Serif font for body text - elegant, book-like
+const crimsonText = Crimson_Text({
+  variable: "--font-crimson",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
+});
+
+// Monospace for code/terminal elements
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
@@ -17,12 +27,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MK | Developer's Grimoire",
-  description: "Software Engineer crafting magical code and infrastructure spells. Where wizardry meets infrastructure.",
-  keywords: ["software engineer", "portfolio", "developer", "infrastructure", "devops"],
-  authors: [{ name: "MK" }],
+  title: "Muhammad Khan | The Developer's Grimoire",
+  description: "Software Engineer crafting magical code and infrastructure spells. A tome of projects, experiences, and arcane knowledge.",
+  keywords: ["software engineer", "portfolio", "LLM", "AI", "distributed systems", "backend", "cloud", "devops", "Toronto"],
+  authors: [{ name: "Muhammad Khan" }],
   openGraph: {
-    title: "MK | Developer's Grimoire",
+    title: "Muhammad Khan | The Developer's Grimoire",
     description: "Software Engineer crafting magical code and infrastructure spells",
     type: "website",
   },
@@ -36,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${cinzel.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
+        className={`${cinzel.variable} ${crimsonText.variable} ${jetbrainsMono.variable} antialiased`}
       >
         {children}
       </body>
