@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  /* Gryffindor Colors */
+  --gryffindor-scarlet: #740001;
+  --gryffindor-gold: #D3A625;
+  --gryffindor-dark: #0A0A0A;
+  --gryffindor-cream: #EEBA30;
+  
+  /* Theme */
+  --background: #0A0A0A;
+  --foreground: #F5F5F5;
+  --accent: #D3A625;
+  --accent-secondary: #740001;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-scarlet: var(--gryffindor-scarlet);
+  --color-gold: var(--gryffindor-gold);
+  --color-cream: var(--gryffindor-cream);
+  --font-sans: var(--font-cinzel);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  cursor: url('/wand-cursor.svg') 4 4, auto;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Magical text glow */
+.text-glow {
+  text-shadow: 0 0 10px rgba(211, 166, 37, 0.5),
+               0 0 20px rgba(211, 166, 37, 0.3),
+               0 0 30px rgba(211, 166, 37, 0.2);
+}
+
+/* Scarlet glow */
+.text-glow-scarlet {
+  text-shadow: 0 0 10px rgba(116, 0, 1, 0.5),
+               0 0 20px rgba(116, 0, 1, 0.3),
+               0 0 30px rgba(116, 0, 1, 0.2);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Candle flicker */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  25%, 75% { opacity: 0.9; }
+}
+
+.animate-flicker {
+  animation: flicker 2s ease-in-out infinite;
+}
+
+/* Sparkle trail cursor effect */
+@keyframes sparkle {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0); }
+}
+
+/* Terminal typing cursor */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gryffindor-gold) 0%, var(--gryffindor-cream) 50%, var(--gryffindor-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Selection color */
+::selection {
+  background: var(--gryffindor-scarlet);
+  color: var(--gryffindor-gold);
+}
