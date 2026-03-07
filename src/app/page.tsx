@@ -1,11 +1,23 @@
 import FloatingCandles from '@/components/FloatingCandles';
 import SparkleTrail from '@/components/SparkleTrail';
 import TypewriterText from '@/components/TypewriterText';
+import SortingHat from '@/components/SortingHat';
+import SpellBook from '@/components/SpellBook';
+import MaraudersMap from '@/components/MaraudersMap';
+import RoomOfRequirement from '@/components/RoomOfRequirement';
+import OwlPost from '@/components/OwlPost';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "MK | Developer's Grimoire",
-  description: "Software Engineer crafting magical code and infrastructure spells",
+  title: "Muhammad Khan | Developer's Grimoire",
+  description: "Software Engineer crafting magical code and infrastructure spells. LLM-powered applications, distributed systems, and scalable microservices.",
+  keywords: ["software engineer", "portfolio", "LLM", "AI", "distributed systems", "backend", "cloud", "devops", "Toronto"],
+  authors: [{ name: "Muhammad Khan" }],
+  openGraph: {
+    title: "Muhammad Khan | Developer's Grimoire",
+    description: "Software Engineer crafting magical code and infrastructure spells",
+    type: "website",
+  },
 };
 
 export default function Home() {
@@ -16,6 +28,8 @@ export default function Home() {
     'brew install magic && npm run wizardry',
     'git push origin main --force-with-lease ✨',
     'docker compose up -d --scale api=3',
+    'kubectl apply -f patronus.yaml',
+    'python train.py --model mistral --lora true',
   ];
 
   return (
@@ -26,11 +40,27 @@ export default function Home() {
       {/* Sparkle trail cursor effect */}
       <SparkleTrail />
       
-      {/* Dark gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-gold/20">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <a href="#" className="text-xl font-bold gradient-text">MK</a>
+            <div className="hidden md:flex items-center gap-6 text-sm">
+              <a href="#sorting-hat" className="text-foreground/60 hover:text-gold transition-colors">About</a>
+              <a href="#spellbook" className="text-foreground/60 hover:text-gold transition-colors">Projects</a>
+              <a href="#marauders-map" className="text-foreground/60 hover:text-gold transition-colors">Experience</a>
+              <a href="#room-of-requirement" className="text-foreground/60 hover:text-gold transition-colors">Skills</a>
+              <a href="#owl-post" className="px-4 py-2 bg-scarlet text-foreground rounded-full border border-gold hover:bg-scarlet/80 transition-colors">Contact</a>
+            </div>
+          </div>
+        </div>
+      </nav>
       
-      {/* Main content */}
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6">
+      {/* Dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10 pointer-events-none" />
+      
+      {/* Hero Section - The Great Hall */}
+      <section className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6 pt-20">
         {/* Gryffindor crest / logo area */}
         <div className="mb-8">
           <div className="w-24 h-24 rounded-full border-4 border-gold flex items-center justify-center bg-scarlet/20 backdrop-blur-sm">
@@ -90,28 +120,22 @@ export default function Home() {
             <div className="w-1 h-3 bg-gold rounded-full animate-pulse" />
           </div>
         </div>
-      </div>
-
-      {/* Placeholder sections for future PRs */}
-      <section id="sorting-hat" className="min-h-screen bg-background/95 relative z-20 flex items-center justify-center">
-        <h2 className="text-4xl font-bold gradient-text">🎩 The Sorting Hat</h2>
       </section>
 
-      <section id="spellbook" className="min-h-screen bg-background relative z-20 flex items-center justify-center">
-        <h2 className="text-4xl font-bold gradient-text">📖 Spell Book</h2>
-      </section>
+      {/* About Section - The Sorting Hat */}
+      <SortingHat />
 
-      <section id="marauders-map" className="min-h-screen bg-background/95 relative z-20 flex items-center justify-center">
-        <h2 className="text-4xl font-bold gradient-text">🗺️ Marauder&apos;s Map</h2>
-      </section>
+      {/* Projects Section - The Spell Book */}
+      <SpellBook />
 
-      <section id="room-of-requirement" className="min-h-screen bg-background relative z-20 flex items-center justify-center">
-        <h2 className="text-4xl font-bold gradient-text">🚪 Room of Requirement</h2>
-      </section>
+      {/* Experience Section - Marauder's Map */}
+      <MaraudersMap />
 
-      <section id="owl-post" className="min-h-screen bg-background/95 relative z-20 flex items-center justify-center">
-        <h2 className="text-4xl font-bold gradient-text">🦉 Owl Post</h2>
-      </section>
+      {/* Skills Section - Room of Requirement */}
+      <RoomOfRequirement />
+
+      {/* Contact Section - Owl Post */}
+      <OwlPost />
     </main>
   );
 }
