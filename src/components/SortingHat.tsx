@@ -65,22 +65,53 @@ export default function SortingHat() {
             viewport={{ once: true }}
             className="relative order-1 lg:order-1"
           >
-            {/* Ornate frame */}
+            {/* Chocolate Frog Card Frame */}
             <div className="relative max-w-[280px] sm:max-w-sm mx-auto">
-              {/* Frame border */}
-              <div className="absolute -inset-3 md:-inset-4 border-2 md:border-4 border-gold-muted/60 rounded-sm" />
-              <div className="absolute -inset-5 md:-inset-6 border border-gold-muted/30 rounded-sm hidden sm:block" />
+              {/* Outer card shape */}
+              <div className="absolute -inset-4 md:-inset-6 bg-gradient-to-b from-amber-900 via-amber-800 to-amber-900 rounded-lg shadow-2xl" />
+              
+              {/* Gold trim layer */}
+              <div className="absolute -inset-3 md:-inset-5 border-4 md:border-[6px] border-yellow-600/80 rounded-lg" 
+                   style={{ 
+                     boxShadow: 'inset 0 0 20px rgba(202, 138, 4, 0.3), 0 0 15px rgba(202, 138, 4, 0.2)' 
+                   }} 
+              />
+              
+              {/* Inner decorative border */}
+              <div className="absolute -inset-1 md:-inset-2 border-2 border-yellow-500/50 rounded-md" />
+              
+              {/* Corner ornaments */}
+              <div className="absolute -top-5 -left-5 md:-top-7 md:-left-7 w-8 h-8 md:w-10 md:h-10 text-yellow-500 text-2xl md:text-3xl flex items-center justify-center">✦</div>
+              <div className="absolute -top-5 -right-5 md:-top-7 md:-right-7 w-8 h-8 md:w-10 md:h-10 text-yellow-500 text-2xl md:text-3xl flex items-center justify-center">✦</div>
+              <div className="absolute -bottom-5 -left-5 md:-bottom-7 md:-left-7 w-8 h-8 md:w-10 md:h-10 text-yellow-500 text-2xl md:text-3xl flex items-center justify-center">✦</div>
+              <div className="absolute -bottom-5 -right-5 md:-bottom-7 md:-right-7 w-8 h-8 md:w-10 md:h-10 text-yellow-500 text-2xl md:text-3xl flex items-center justify-center">✦</div>
               
               {/* Portrait */}
-              <div className="relative aspect-[3/4] overflow-hidden bg-ink">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`${basePath}/profile.jpg`}
-                  alt="Muhammad Khan"
-                  className="w-full h-full object-cover sepia-[0.2] contrast-[1.1]"
-                />
+              <div className="relative aspect-[3/4] overflow-hidden bg-ink rounded-sm">
+                {/* Living Portrait - Chocolate Frog Card Effect */}
+                <motion.div
+                  className="w-full h-full"
+                  animate={{
+                    scale: [1, 1.05, 1.03, 1.06, 1],
+                    x: [0, 8, -5, 10, -8, 0],
+                    y: [0, -5, 3, -8, 5, 0],
+                  }}
+                  transition={{
+                    duration: 20,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`${basePath}/profile.jpg`}
+                    alt="Muhammad Khan"
+                    className="w-full h-full object-cover sepia-[0.2] contrast-[1.1] scale-110"
+                  />
+                </motion.div>
                 {/* Aged overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/40" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/40 pointer-events-none" />
               </div>
               
               {/* Nameplate */}
